@@ -59,7 +59,7 @@ os.makedirs(cfg.ckpt_dir, exist_ok=True)
 def main():
   logger = create_logger(cfg.local_rank, save_dir=cfg.log_dir)
   summary_writer = create_summary(cfg.local_rank, log_dir=cfg.log_dir)
-  print = logger.info
+  #print = logger.info
 
   print(cfg)
   num_gpus = torch.cuda.device_count()
