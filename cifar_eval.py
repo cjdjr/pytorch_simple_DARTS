@@ -93,7 +93,7 @@ def main():
                                             num_workers=cfg.num_workers)
 
   print('==> Building model..')
-  genotype = torch.load(os.path.join(cfg.ckpt_dir, 'seed-14880-best-genotype.pth'))['genotype']
+  genotype = torch.load(os.path.join(cfg.ckpt_dir, 'seed-14880-best-genotype.pth'))
   model = NetworkCIFAR(genotype, cfg.init_ch, cfg.num_cells, cfg.auxiliary, num_classes=cifar)
 
   if not cfg.dist:
