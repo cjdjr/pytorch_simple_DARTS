@@ -22,7 +22,7 @@ parser = argparse.ArgumentParser(description='darts')
 parser.add_argument('--local_rank', type=int, default=0)
 parser.add_argument('--dist', action='store_true')
 
-parser.add_argument('--root_dir', type=str, default='./')
+parser.add_argument('--root_dir', type=str, default='./temp')
 parser.add_argument('--data_dir', type=str, default='./data')
 parser.add_argument('--log_name', type=str, default='test')
 
@@ -32,9 +32,9 @@ parser.add_argument('--wd', type=float, default=3e-4)
 parser.add_argument('--init_ch', type=int, default=36)
 parser.add_argument('--num_cells', type=int, default=20)
 
-parser.add_argument('--auxiliary', type=float, default=0.4)
-parser.add_argument('--cutout', type=int, default=16)
-parser.add_argument('--drop_path_prob', type=float, default=0.2)
+parser.add_argument('--auxiliary', type=float, default=0.4) # ?
+parser.add_argument('--cutout', type=int, default=16) # ?
+parser.add_argument('--drop_path_prob', type=float, default=0.2) # ?
 
 parser.add_argument('--batch_size', type=int, default=96)
 parser.add_argument('--max_epochs', type=int, default=600)
@@ -120,6 +120,7 @@ def main():
     for batch_idx, (inputs, targets) in enumerate(train_loader):
       inputs, targets = inputs.to(device), targets.to(device, non_blocking=True)
 
+      # very important
       outputs, outputs_aux = model(inputs)
       loss = criterion(outputs, targets)
       loss_aux = criterion(outputs_aux, targets)
