@@ -22,7 +22,7 @@ parser = argparse.ArgumentParser(description='darts')
 parser.add_argument('--local_rank', type=int, default=0)
 parser.add_argument('--dist', action='store_true')
 
-parser.add_argument('--root_dir', type=str, default='./temp')
+parser.add_argument('--root_dir', type=str, default='./')
 parser.add_argument('--data_dir', type=str, default='./data')
 parser.add_argument('--log_name', type=str, default='test')
 
@@ -60,7 +60,7 @@ os.makedirs(cfg.ckpt_dir, exist_ok=True)
 def main():
   logger = create_logger(cfg.local_rank, save_dir=cfg.log_dir)
   summary_writer = create_summary(cfg.local_rank, log_dir=cfg.log_dir)
-  # print = logger.info
+  print = logger.info
 
   print(cfg)
   num_gpus = torch.cuda.device_count()
