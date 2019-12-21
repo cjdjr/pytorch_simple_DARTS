@@ -5,6 +5,7 @@ from nets.operations import *
 
 def drop_path(x, drop_prob):
   if drop_prob > 0.:
+    print("enter drop_path ... ")
     keep_prob = 1. - drop_prob
     mask = torch.cuda.FloatTensor(x.size(0), 1, 1, 1).bernoulli_(keep_prob)
     x.div_(keep_prob)
@@ -141,6 +142,7 @@ class NetworkCIFAR(nn.Module):
     self._layers = layers
     self._auxiliary = auxiliary
 
+    # ?????????
     stem_multiplier = 3
     C_curr = stem_multiplier * C
     self.stem = nn.Sequential(nn.Conv2d(3, C_curr, kernel_size=3, padding=1, bias=False),
@@ -164,6 +166,7 @@ class NetworkCIFAR(nn.Module):
 
     if auxiliary:
       self.auxiliary_head = AuxiliaryHeadCIFAR(C_to_auxiliary, num_classes)
+    # 最后会成为一个1x1的tensor
     self.global_pooling = nn.AdaptiveAvgPool2d(1)
     self.classifier = nn.Linear(C_prev, num_classes)
 
