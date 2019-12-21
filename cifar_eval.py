@@ -12,6 +12,7 @@ from utils.utils import count_parameters, count_flops, DisablePrint
 from utils.dataset import CIFAR_split
 from utils.preprocessing import cifar_search_transform
 from utils.summary import create_summary, create_logger
+from genotypes import DARTS_V2,seed14880
 
 torch.backends.cudnn.benchmark = True
 
@@ -93,7 +94,9 @@ def main():
                                             num_workers=cfg.num_workers)
 
   print('==> Building model..')
-  genotype = torch.load(os.path.join(cfg.ckpt_dir, 'seed-14880-best-genotype.pth'))
+  print(os.path.join(cfg.ckpt_dir, 'seed-14880-best-genotype.pth'))
+  #genotype = torch.load(os.path.join(cfg.ckpt_dir, 'seed-14880-best-genotype.pth'))
+  genotype = seed14880
   model = NetworkCIFAR(genotype, cfg.init_ch, cfg.num_cells, cfg.auxiliary, num_classes=cifar)
 
   if not cfg.dist:
@@ -163,7 +166,7 @@ def main():
     train(epoch)
     test(epoch)
     scheduler.step(epoch)  # move to here after pytorch1.1.0
-    print(model.module.genotype())
+    #print(model.module.genotype())
     if cfg.local_rank == 0:
       torch.save(model.state_dict(), os.path.join(cfg.ckpt_dir, 'checkpoint.t7'))
 

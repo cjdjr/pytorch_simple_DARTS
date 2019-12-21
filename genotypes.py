@@ -89,3 +89,5 @@ DARTS_V2 = Genotype(
           ('max_pool_3x3', 0),
           ('skip_connect', 2), ('skip_connect', 2), ('max_pool_3x3', 1)],
   reduce_concat=[2, 3, 4, 5])
+  
+seed14880=Genotype(normal=[('sep_conv_3x3', 1), ('max_pool_3x3', 0), ('sep_conv_5x5', 0), ('dil_conv_3x3', 1), ('max_pool_3x3', 0), ('dil_conv_5x5', 1), ('max_pool_3x3', 0), ('max_pool_3x3', 1)], normal_concat=range(2, 6), reduce=[('skip_connect', 0), ('skip_connect', 1), ('sep_conv_3x3', 1), ('skip_connect', 0), ('dil_conv_3x3', 2), ('skip_connect', 0), ('skip_connect', 0), ('dil_conv_3x3', 2)], reduce_concat=range(2, 6))
